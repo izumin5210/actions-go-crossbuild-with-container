@@ -1,12 +1,40 @@
-name: 'Container Action Template'
-description: 'Get started with Container actions'
-author: 'GitHub'
+name: Go crossbuild
+description: Build Go applications for multiplatform and packaging with goxz
+author: 'izumin5210'
 inputs: 
-  myInput:
-    description: 'Input to use'
-    default: 'world'
+  name:
+    description: 'An application name'
+    required: true
+  arch:
+    description: 'Space or comma separated list of GOARCH'
+    default: 'amd64'
+  dest:
+    description: 'Path to destination directory of built binaries'
+    default: './dist'
+  ldflags:
+    description: '`-ldflags` to pass to go build'
+    default: ''
+  tags:
+    description: '`-tags` to pass to go build'
+    default: ''
+  os:
+    description: 'Space or comma separated list of GOOS'
+    default: 'darwin,linux,windows'
+  package:
+    description: 'Build target package'
+    required: true
+  goxz-version:
+    description: 'Version of github.com/Songmu/goxz'
+    default: 'v0.4.1'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.myInput }}
+    - ${{ inputs.name }}
+    - ${{ inputs.package }}
+    - ${{ inputs.dest }}
+    - ${{ inputs.arch }}
+    - ${{ inputs.os }}
+    - ${{ inputs.ldflags }}
+    - ${{ inputs.tags }}
+    - ${{ inputs.goxz_version }}
