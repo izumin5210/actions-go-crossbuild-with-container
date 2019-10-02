@@ -23,9 +23,6 @@ inputs:
   package:
     description: 'Build target package'
     required: true
-  goxz-version:
-    description: 'Version of github.com/Songmu/goxz'
-    default: 'v0.4.1'
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -37,4 +34,3 @@ runs:
     - ${{ inputs.os }}
     - ${{ inputs.ldflags }}
     - ${{ inputs.tags }}
-    - ${{ inputs.goxz_version }}
